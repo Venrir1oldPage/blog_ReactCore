@@ -1,0 +1,30 @@
+@import '../../../assets/variables.module.scss';
+.card {
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    border-radius: 5px;
+    max-width: 938px;
+    width: 100%;
+min-height: 107px;
+box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.15);
+padding: 19px 15px 14px 24px;
+justify-content: space-around;
+list-style: none;
+display: flex;
+flex-direction: column;
+}
+
+.text{
+    margin: 0;
+    width: 72%;
+    min-width: 400px;
+    max-width: 668px;;
+min-height: 45px;
+font-size: 12px;
+font-style: normal;
+font-weight: 400;
+line-height: 22px;
+color: $text-color;
+overflow-wrap: break-word;
+}
