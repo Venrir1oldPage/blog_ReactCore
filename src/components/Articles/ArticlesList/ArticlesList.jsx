@@ -48,10 +48,10 @@ const ArticlesList = ({articlesData, articlesCount, loading, error, getArticles}
 
 
 const mapStateToProps =(state) => ({
-  articlesData:state.articles,
-  articlesCount:state.articlesCount,
-  loading:state.loadArticles,
-  error:state.errorArticles,
+  articlesData:state.articles.articles,
+  articlesCount:state.articles.articlesCount,
+  loading:state.articles.loadArticles,
+  error:state.articles.errorArticles,
 })
 
 export default connect(mapStateToProps, {getArticles})(ArticlesList)

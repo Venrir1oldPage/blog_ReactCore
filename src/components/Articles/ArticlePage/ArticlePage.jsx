@@ -11,10 +11,11 @@ import ArticleHeader from '../ArticleHeader/ArticleHeader'
 import classes from './ArticlePage.module.scss'
 
 const ArticlePage = ({data, loading, error, getArticle}) => {
+
   const {slug} = useParams()
 
   const antIcon = <LoadingOutlined spin />
-  
+
   useEffect(()=>{
     getArticle(slug)
   },[slug])
@@ -38,9 +39,9 @@ const ArticlePage = ({data, loading, error, getArticle}) => {
 }
 
 const mapStateToProps =(state) => ({
-  data:state.article,
-  loading:state.loadArticles,
-  error:state.errorArticle,
+  data:state.article.article,
+  loading:state.article.loadArticle,
+  error:state.article.errorArticle,
 })
 
 export default connect(mapStateToProps, actions)(ArticlePage)

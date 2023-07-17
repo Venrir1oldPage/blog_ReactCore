@@ -19,9 +19,75 @@
    line-height: 28px;
    text-decoration: none;
 }
+
+.leftBar{
+    display: flex;
+    align-items: center;
+}
+
+.create{
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px;
+    color:$success-color;
+    border-radius: 5px;
+    border: 1px solid $success-color;
+    background-color: transparent;
+    height: 31px;
+    width: 112px;
+    box-sizing: border-box;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 26px;
+    &:hover, &:focus{
+        border: solid 2px $primary-color;
+        border-radius: 5px;
+        outline: solid 2px $primary-color;
+    }
+}
+
+.userName{
+    margin-right: 10px;
+    font-size: 18px;
+font-style: normal;
+font-weight: 400;
+line-height: 28px;
+color: $heading-color;
+}
+
+.avatar{
+    margin-right: 26px;
+    border-radius: 50%;
+}
+
+.logOut{
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 28px;
+    color:$text-color;
+    border-radius: 5px;
+    border: 1px solid $text-color;
+    background-color: transparent;
+    height: 51px;
+    width: 109px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:hover, &:focus{
+        border: solid 2px $primary-color;
+        border-radius: 5px;
+        outline: solid 2px $primary-color;
+    }
+
+}
+
 .signIn{
     margin-right: 20px;
-    margin-left: auto;
     font-size: 18px;
 font-style: normal;
 font-weight: 400;
@@ -30,10 +96,14 @@ border: 0;
 background-color: transparent;
 width: 84px;
 height: 51px;
+text-decoration: none;
+display: flex;
+align-items: center;
+justify-content: center;
 &:hover, &:focus{
     border: solid 2px $primary-color;
     border-radius: 5px;
-    outline: solid 2px $primary-color;
+    outline: solid 1px $primary-color;
 }
 }
 
@@ -49,9 +119,19 @@ border: 1px solid $success-color;
 background-color: transparent;
 height: 51px;
 width: 109px;
+text-decoration: none;
+display: flex;
+align-items: center;
+justify-content: center;
 &:hover, &:focus{
     border: solid 2px $primary-color;
     border-radius: 5px;
     outline: solid 2px $primary-color;
 }
+}
+
+.profile{
+    text-decoration: none;
+    display: flex;
+    align-items: center;
 }

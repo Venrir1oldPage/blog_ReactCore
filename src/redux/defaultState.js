@@ -1,11 +1,21 @@
 const defaultState = {
-  articles: [],
-  article:[],
-  loadArticles:true,
-  errorArticles:false,
-  articlesCount:null,
-  loadArticle:true,
-  errorArticle:false,
+  articles:{
+    articles: [],
+    loadArticles:true,
+    errorArticles:false,
+    articlesCount:null,
+  },
+  article:{
+    article:{},
+    loadArticle:true,
+    errorArticle:false,
+  },
+  user:{ 
+    userName:null,
+    userEmail:null,
+    userImg:null,
+    serverErrors:null,
+  }
 }
     
 export default defaultState
