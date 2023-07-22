@@ -71,7 +71,6 @@ const Api = {
   async updateUser(newUserData) {
     const token = window.localStorage.getItem('tokenForBlog')
 
-    console.log('upd',token)
     const res = await axios({
       method: 'put',
       url:`${this.baseUrl}/user`,
@@ -87,7 +86,6 @@ const Api = {
     }
     this.token = data.user.token
     window.localStorage.setItem('tokenForBlog', this.token)
-    console.log(data)
     return data
     
   },
@@ -110,6 +108,56 @@ const Api = {
     const {data} = res
     if (res.status !== 200){
       throw data.errors=[{password:'Something went wrong. Check your data'}]
+    }
+    return data
+  },
+
+  async addArticle(articleData) {
+    const token = window.localStorage.getItem('tokenForBlog')
+    const res = await axios({
+      method: 'post',
+      url:`${this.baseUrl}/articles`,
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: `Bearer ${token}`,
+      },
+      data: JSON.stringify({ article: articleData }),
+    }) 
+    const {data} = res
+    if (res.status !== 200){
+      throw new Error('Server Error!')
+    }
+    return data
+  },
+
+  async deleteArticle(slug) {
+    const token = window.localStorage.getItem('tokenForBlog')
+    const res = await axios({
+      method: 'delete',
+      url:`${this.baseUrl}/articles/${slug}`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }) 
+    if (res.status !== 200){
+      throw new Error('Server Error!')
+    }
+  },
+
+  async editArticle(articleData, slug) {
+    const token = window.localStorage.getItem('tokenForBlog')
+    const res = await axios({
+      method: 'put',
+      url:`${this.baseUrl}/articles/${slug}`,
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: `Bearer ${token}`,
+      },
+      data: JSON.stringify({ article: articleData }),
+    }) 
+    const {data} = res
+    if (res.status !== 200){
+      throw new Error('Server Error!')
     }
     return data
   },

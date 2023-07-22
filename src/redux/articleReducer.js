@@ -12,6 +12,9 @@ const articleReducer = (state=article, action) =>{
     newState.loadArticle = false
     newState.errorArticle=true
     return newState
+  case('CLEAR_ARTICLE'):
+    newState.article = {}
+    return newState
   default: return state
   }}
 

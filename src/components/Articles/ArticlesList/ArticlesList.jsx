@@ -32,7 +32,7 @@ const ArticlesList = ({articlesData, articlesCount, loading, error, getArticles}
     let key = uuidv4()
     const {slug, ...data}=i
     return (
-      <Link to={'/articles/'+slug} key={key} className={classes['link']} ><ArticleShort data={data}/></Link>
+      <Link to={`/articles/${slug}`} key={key} className={classes['link']} ><ArticleShort data={data}/></Link>
     )
   })
 

@@ -1,7 +1,6 @@
 import { HeartOutlined ,HeartFilled } from '@ant-design/icons' 
 import { format } from 'date-fns'
 
-import  defaultAvatar from '../../../assets/UserImg.png'
 import TagList from '../TagList/TagList'
 
 import classes from './ArticleHeader.module.scss'
@@ -13,6 +12,8 @@ const ArticleHeader = ({data}) => {
   const date = format(new Date(createdAt),'MMMM dd, yyyy')
   const iconHeart = favorited?<HeartFilled className={classes['heartOn']}/>:
     <HeartOutlined className={classes['heartOff']}/>
+  let defaultImg = 'https://i.pinimg.com/474x/f4/da/28/f4da28534b1e73299817f668c0052531.jpg'
+  let userImg=author.image?author.image:defaultImg
   
   return (
     <header className={classes['block']}>
@@ -29,7 +30,7 @@ const ArticleHeader = ({data}) => {
           <h3 className={classes['userName']}>{author.username}</h3>
           <p className={classes['date']}>{date}</p>
         </div>
-        <img className={classes['avatar']} width={46} height={46} src={author.image || defaultAvatar} alt='avatar' />
+        <img className={classes['avatar']} width={46} height={46} src={userImg} alt='avatar' />
       </div>
     </header>
   )

@@ -79,3 +79,29 @@ export const editProfile= (userData) => async (dispatch) => {
   catch (e) {
     dispatch(initServerError())
   }}
+
+export const addArticle= (article) => async (dispatch) => {
+  try {
+    await Api.addArticle(article)
+  }
+  catch (e) {
+    dispatch(initServerError())
+  }}
+
+export const deleteArticle= (slug) => async (dispatch) => {
+  try {
+    await Api.deleteArticle(slug)
+  }
+  catch (e) {
+    dispatch(initServerError())
+  }}
+
+export const  clearArticle = () => ({ type: 'CLEAR_ARTICLE'})
+
+export const editArticle= (article, slug) => async (dispatch) => {
+  try {
+    await Api.editArticle(article,slug)
+  }
+  catch (e) {
+    dispatch(initServerError())
+  }}

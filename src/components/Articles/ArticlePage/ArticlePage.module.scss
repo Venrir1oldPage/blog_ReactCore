@@ -28,3 +28,22 @@ overflow-wrap: break-word;
 .textFull{
     overflow-wrap: break-word;
 }
+
+.wrapper{
+    display: flex;
+    justify-content: space-between;
+}
+
+.edit{
+    border: 1px solid $success-color;
+    background-color: transparent;
+    color:$success-color;
+    width: 56px;
+    height: 31px;
+    border-radius: 5px;
+    margin-right: 12px;
+    font-size: 14px;
+    line-height: 22px;
+    cursor: pointer;
+    margin-left: 12px;
+}

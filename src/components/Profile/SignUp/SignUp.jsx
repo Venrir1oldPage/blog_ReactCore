@@ -50,7 +50,7 @@ const SignUp = ({serverErrors, clearServerErrors, createUser}) => {
     <div className={classes['card']}>
       <h2 className={classes['header']}>Create new account</h2>
       <form name='signUp' onSubmit={handleSubmit(onSubmit)}>
-        <FormInput placeholder="Username"  type='username' label='Username' error={errors.username} autofocus
+        <FormInput placeholder="Username"  type='text' label='Username' error={errors.username} autofocus
           options={register('username', {
             required: 'The field must be filled in',
             pattern: {

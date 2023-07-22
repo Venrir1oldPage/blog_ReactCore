@@ -6,6 +6,7 @@ import ArticlePage from '../Articles/ArticlePage/ArticlePage'
 import SignUp from '../Profile/SignUp/SignUp'
 import SignIn from '../Profile/SignIn/SignIn'
 import EditProfile from '../Profile/EditProfile/EditProfile'
+import CreateArticlePage from '../Articles/CreateArticlePage/CreateArticlePage'
 
 
 import './App.module.scss'
@@ -21,9 +22,11 @@ function App() {
         <Route path="/:paginate" Component={ArticlesList} />
         <Route path="/articles"  Component={ArticlesList} />
         <Route path="/articles/:slug" Component={ArticlePage} />
+        <Route path="/articles/:slug/edit" Component={CreateArticlePage} />
         <Route path="/sign-up" Component={SignUp} />
         <Route path="/sign-in"  Component={SignIn} />
         <Route path="/profile" Component={EditProfile} />
+        <Route path="/new-article" Component={CreateArticlePage} />
       </Routes>
     </Router>
   )

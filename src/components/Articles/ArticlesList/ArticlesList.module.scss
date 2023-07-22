@@ -11,6 +11,8 @@
     margin: 0;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    width: 65%;
     gap: 26px;
     margin-top: 26px;
     width: 65%;
@@ -21,6 +23,7 @@
 
 .link{
     text-decoration: none;
+    width: 100%;
 }
 
 .spin{

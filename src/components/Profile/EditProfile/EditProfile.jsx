@@ -7,7 +7,7 @@ import * as actions from '../../../redux/actions'
 
 import classes from './EditProfile.module.scss'
 
-const EditProfile = ({userName, userEmail, serverErrors, clearServerErrors, editProfile}) => {
+const EditProfile = ({userName,userImg, userEmail, serverErrors, clearServerErrors, editProfile}) => {
 
   useEffect(
     () => () => {
@@ -26,7 +26,7 @@ const EditProfile = ({userName, userEmail, serverErrors, clearServerErrors, edit
       username: data.username,
       email: data.email,
       password: data.password,
-      image:data.avatar,
+      image:data.avatar||userImg,
     }
     editProfile(newUser)
   }
@@ -105,6 +105,7 @@ const EditProfile = ({userName, userEmail, serverErrors, clearServerErrors, edit
 const mapStateToProps =(state) => ({
   serverErrors:state.user.serverErrors,
   userName:state.user.userName,
+  userImg:state.user.userImg,
   userEmail:state.user.userEmail
 })
 
