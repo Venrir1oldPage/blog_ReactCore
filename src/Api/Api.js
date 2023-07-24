@@ -8,8 +8,15 @@ const Api = {
   async getArticles(page){
     page = page - 1
     const offset = this.pageSize * page
+    const token = window.localStorage.getItem('tokenForBlog')
     try {
-      const { data } = await axios.get(`${this.baseUrl}/articles?limit=${this.pageSize}&offset=${offset}`)
+      const { data } = await axios({
+        method: 'get',
+        url:`${this.baseUrl}/articles?limit=${this.pageSize}&offset=${offset}`,
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+          Authorization: `Bearer ${token}`,
+        }})
       return data
     } catch (e) {
       if (e.response.status == 500) return null
@@ -160,6 +167,22 @@ const Api = {
       throw new Error('Server Error!')
     }
     return data
+  },
+
+  async toggleLike(slug, like) {
+    console.log(like)
+    const method=like?'post':'delete'
+    const token = window.localStorage.getItem('tokenForBlog')
+    const res = await axios({
+      method: method,
+      url:`${this.baseUrl}/articles/${slug}/favorite`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }) 
+    if (res.status !== 200){
+      throw new Error('Server Error!')
+    }
   },
 
 }

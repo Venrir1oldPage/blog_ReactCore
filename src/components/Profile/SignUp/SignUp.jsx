@@ -2,6 +2,7 @@ import {Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { useEffect } from 'react'
 import {connect} from 'react-redux'
+import PropTypes from 'prop-types'
 
 
 import * as actions from '../../../redux/actions'
@@ -110,5 +111,11 @@ const SignUp = ({serverErrors, clearServerErrors, createUser}) => {
 const mapStateToProps =(state) => ({
   serverErrors:state.user.serverErrors,
 })
+
+SignUp.propTypes = {
+  serverErrors:PropTypes.array,
+  clearServerErrors:PropTypes.func.isRequired,
+  createUser:PropTypes.func.isRequired,
+}
 
 export default connect(mapStateToProps, actions)(SignUp)

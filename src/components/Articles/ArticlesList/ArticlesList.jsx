@@ -1,9 +1,9 @@
-import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { Spin, Alert} from 'antd'
 import { LoadingOutlined } from '@ant-design/icons'
 import { connect } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
+import PropTypes from 'prop-types'
 
 import {getArticles}  from '../../../redux/actions'
 import CustomPafination from '../CustomPagination/CustomPagination'
@@ -32,7 +32,7 @@ const ArticlesList = ({articlesData, articlesCount, loading, error, getArticles}
     let key = uuidv4()
     const {slug, ...data}=i
     return (
-      <Link to={`/articles/${slug}`} key={key} className={classes['link']} ><ArticleShort data={data}/></Link>
+      <ArticleShort data={data} slug={slug} key={key}/>
     )
   })
 
@@ -53,6 +53,19 @@ const mapStateToProps =(state) => ({
   loading:state.articles.loadArticles,
   error:state.articles.errorArticles,
 })
+
+ArticlesList.defaultProps ={
+  loading:true,
+  error:false,
+}
+
+ArticlesList.propTypes = {
+  loading:PropTypes.bool,
+  error:PropTypes.bool,
+  getArticles:PropTypes.func.isRequired,
+  articlesData: PropTypes.array.isRequired,
+  articlesCount:PropTypes.number,
+}
 
 export default connect(mapStateToProps, {getArticles})(ArticlesList)
 

@@ -65,8 +65,18 @@ color: $text-color-secondary;
 
 .heartOn{
     color:$highlight-color;
+    border: 0;
+    padding: 0;
+    background-color: transparent;
 }
 
 .heartOff{
     color:$text-color;
+    border: 0;
+    padding: 0;
+    background-color: transparent;
+}
+
+.link{
+    text-decoration: none;
 }

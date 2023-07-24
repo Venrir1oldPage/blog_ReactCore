@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import { useEffect } from 'react'
 import { Spin, Alert } from 'antd'
 import { LoadingOutlined } from '@ant-design/icons'
+import PropTypes from 'prop-types'
 
 import * as actions from '../../../redux/actions'
 import FormInput from '../../Profile/FormInput/FormInput'
@@ -15,9 +16,14 @@ const CreateArticlePage = ({addArticle, getArticle, data, loading, error, editAr
   const {slug} = useParams()
 
   useEffect(()=>{
-    getArticle(slug)
+    if(slug) {
+      getArticle(slug)
+    }
   },[slug])
 
+  if (!slug) {
+    loading=false
+  }
   let {title, description, body, tagList } = data
 
   useEffect(() => {
@@ -101,8 +107,8 @@ const CreateArticlePage = ({addArticle, getArticle, data, loading, error, editAr
               message: 'User name needs to be at least 3 characters',
             },
             maxLength: {
-              value: 300,
-              message: 'User name must contain no more than 300 characters',
+              value: 500,
+              message: 'Text must contain no more than 500 characters',
             },
           })}
         />
@@ -114,8 +120,8 @@ const CreateArticlePage = ({addArticle, getArticle, data, loading, error, editAr
               message: 'User name needs to be at least 3 characters',
             },
             maxLength: {
-              value: 150,
-              message: 'User name must contain no more than 150 characters',
+              value: 1500,
+              message: 'User name must contain no more than 1500 characters',
             },
           })}
         />
@@ -139,6 +145,20 @@ const mapStateToProps =(state) => ({
   loading:state.article.loadArticle,
   error:state.article.errorArticle,
 })
+
+CreateArticlePage.defaultProps ={
+  loading:true,
+  error:false,
+}
+
+CreateArticlePage.propTypes = {
+  loading:PropTypes.bool,
+  error:PropTypes.bool,
+  editArticle:PropTypes.func.isRequired,
+  getArticle:PropTypes.func.isRequired,
+  addArticle:PropTypes.func.isRequired,
+  data:PropTypes.object.isRequired,
+}
 
 export default connect(mapStateToProps, actions)(CreateArticlePage)
 

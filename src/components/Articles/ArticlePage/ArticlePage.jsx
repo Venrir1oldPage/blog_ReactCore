@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Spin, Alert, Button, message, Popconfirm } from 'antd'
 import { LoadingOutlined } from '@ant-design/icons'
-
+import PropTypes from 'prop-types'
 
 
 import * as actions from '../../../redux/actions'
@@ -50,7 +50,7 @@ const ArticlePage = ({data, loading, error,userName, getArticle, deleteArticle})
 
     return(
       <div className={classes['block']}>
-        <ArticleHeader data={rest} />
+        <ArticleHeader data={rest} slug={slug} />
         <div className={classes['wrapper']}>
           <p className={classes['textShort']}>{description}</p>
           {buttons}
@@ -69,5 +69,19 @@ const mapStateToProps =(state) => ({
   error:state.article.errorArticle,
   userName:state.user.userName,
 })
+
+ArticlePage.defaultProps ={
+  loading:true,
+  error:false,
+}
+
+ArticlePage.propTypes = {
+  loading:PropTypes.bool,
+  error:PropTypes.bool,
+  getArticle:PropTypes.func.isRequired,
+  deleteArticle:PropTypes.func.isRequired,
+  data: PropTypes.object.isRequired,
+  userName:PropTypes.string,
+}
 
 export default connect(mapStateToProps, actions)(ArticlePage)

@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from 'uuid'
+import PropTypes from 'prop-types'
 
 import classes from './TagList.module.scss'
 
@@ -15,6 +16,10 @@ const TagList = ({data}) => {
       {tags}
     </ul>
   )
+}
+
+TagList.propTypes = {
+  data:PropTypes.array.isRequired,
 }
 
 export default TagList

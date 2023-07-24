@@ -1,7 +1,7 @@
 import { Link , useNavigate } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { useEffect } from 'react'
-
+import PropTypes from 'prop-types'
 
 import * as actions from '../../redux/actions'
 
@@ -44,5 +44,12 @@ const mapStateToProps =(state) => ({
   userName:state.user.userName,
   userImg:state.user.userImg,
 })
+
+PageHeader.propTypes = {
+  userName:PropTypes.string, 
+  userImg:PropTypes.string, 
+  getCurrentUser:PropTypes.func.isRequired,
+  logOut: PropTypes.func.isRequired,
+}
 
 export default connect(mapStateToProps,actions)(PageHeader)

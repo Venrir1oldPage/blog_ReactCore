@@ -1,4 +1,5 @@
 import { ConfigProvider, Pagination } from 'antd'
+import PropTypes from 'prop-types'
 
 const style = {
   colorBgContainer: '#1677ff',
@@ -22,6 +23,16 @@ const CustomPafination = ({ onChange, paginationCount, current }) => {
       />
     </ConfigProvider>
   )
+}
+
+CustomPafination.defaultProps ={
+  current:1,
+}
+
+CustomPafination.propTypes = {
+  onChange:PropTypes.func.isRequired,
+  paginationCount:PropTypes.number,
+  current:PropTypes.number,
 }
 
 export default CustomPafination

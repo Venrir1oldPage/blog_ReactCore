@@ -1,6 +1,8 @@
+import PropTypes from 'prop-types'
+
 import classes from './FormInput.module.scss'
 
-const FormInput = ({label, placeholder, type, options, error, defaultValue=null, autofocus }) => {
+const FormInput = ({label, placeholder, type, options, error, defaultValue, autofocus }) => {
  
   const inputClass = error ? `${classes.input} ${classes.inputError}` : classes.input
   let labelClass = classes.label
@@ -30,5 +32,20 @@ const FormInput = ({label, placeholder, type, options, error, defaultValue=null,
     </div >
   )
 }
+
+FormInput.defaultProps ={
+  defaultValue:'',
+}
+
+FormInput.propTypes = {
+  autofocus:PropTypes.bool,
+  error:PropTypes.object,
+  options:PropTypes.object,
+  type:PropTypes.string,
+  placeholder:PropTypes.string,
+  label:PropTypes.string,
+  defaultValue:PropTypes.string,
+}
+
 
 export default FormInput

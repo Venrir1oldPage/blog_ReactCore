@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { useEffect } from 'react'
 import {connect} from 'react-redux'
+import PropTypes from 'prop-types'
 
 import FormInput from '../FormInput/FormInput'
 import * as actions from '../../../redux/actions'
@@ -108,5 +109,14 @@ const mapStateToProps =(state) => ({
   userImg:state.user.userImg,
   userEmail:state.user.userEmail
 })
+
+EditProfile.propTypes = {
+  userName:PropTypes.string, 
+  userEmail:PropTypes.string, 
+  userImg:PropTypes.string, 
+  serverErrors:PropTypes.array,
+  clearServerErrors:PropTypes.func.isRequired,
+  editProfile: PropTypes.func.isRequired,
+}
 
 export default connect(mapStateToProps, actions)(EditProfile)

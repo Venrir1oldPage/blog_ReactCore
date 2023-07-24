@@ -105,3 +105,11 @@ export const editArticle= (article, slug) => async (dispatch) => {
   catch (e) {
     dispatch(initServerError())
   }}
+
+export const toggleLike= (slug,like) => async (dispatch) => {
+  try {
+    await Api.toggleLike(slug, like)
+  }
+  catch (e) {
+    dispatch(initServerError())
+  }}
