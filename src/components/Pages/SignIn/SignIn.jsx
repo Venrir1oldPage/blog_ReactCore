@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 
 import * as actions from '../../../redux/actions'
-import FormInput from '../FormInput/FormInput'
+import FormInput from '../../FormInput/FormInput'
 
 import classes from './SignIn.module.scss'
 
@@ -78,9 +78,9 @@ const SignIn = ({serverErrors,userName, clearServerErrors, login}) => {
           })}
         />
         <button  type="submit" className={classes['button']} >Login</button>
-        <p className={classes['question']} >Already have an account? 
-          <Link to='/sign-up' className={classes['link']} > Sign Up.</Link></p>
       </form>
+      <p className={classes['question']} >Already have an account? 
+        <Link to='/sign-up' className={classes['link']} > Sign Up.</Link></p>
     </div>
   )
 }

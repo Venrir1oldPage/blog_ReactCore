@@ -2,17 +2,15 @@ import axios from 'axios'
 
 const Api = {
   baseUrl: 'https://blog.kata.academy/api',
-  pageSize:6,
   token:'',
 
-  async getArticles(page){
-    page = page - 1
-    const offset = this.pageSize * page
+  async getArticles(page){   
     const token = window.localStorage.getItem('tokenForBlog')
+    let offset = (page-1)*6
     try {
       const { data } = await axios({
         method: 'get',
-        url:`${this.baseUrl}/articles?limit=${this.pageSize}&offset=${offset}`,
+        url:`${this.baseUrl}/articles?limit=6&offset=${offset}`,
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
           Authorization: `Bearer ${token}`,
@@ -24,8 +22,15 @@ const Api = {
   },
 
   async getArticle(slug){
+    const token = window.localStorage.getItem('tokenForBlog')
     try {
-      const { data } = await axios.get(`${this.baseUrl}/articles/${slug}`)
+      const { data } = await axios({
+        method: 'get',
+        url:`${this.baseUrl}/articles/${slug}`,
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+          Authorization: `Bearer ${token}`,
+        }})
       return data
     } catch (e) {
       if (e.response.status == 500) return null

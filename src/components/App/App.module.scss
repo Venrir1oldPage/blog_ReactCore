@@ -6,4 +6,13 @@ html, body{
     background-color: $background;
     margin: 0;
     padding: 0;
+    position: relative;
+}
+
+
+.alert{
+position: absolute;
+z-index: 3;
+opacity: 85%;
+margin-left: 20px;
 }

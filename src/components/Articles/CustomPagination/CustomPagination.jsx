@@ -8,7 +8,6 @@ const style = {
   fontSize:12,
 }
   
-
 const CustomPafination = ({ onChange, paginationCount, current }) => {
   return (
     <ConfigProvider theme={{ components: { Pagination: style } }}>
@@ -17,7 +16,7 @@ const CustomPafination = ({ onChange, paginationCount, current }) => {
         current={current}
         total={paginationCount}
         defaultCurrent={1}
-        defaultPageSize={5}
+        defaultPageSize={6}
         onChange={(el) => onChange(el)}
         showSizeChanger={false}
       />

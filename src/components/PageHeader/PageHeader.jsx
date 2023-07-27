@@ -18,7 +18,7 @@ const PageHeader = ({userName, userImg, logOut, getCurrentUser}) => {
 
   const logOutClick = () => {
     logOut()
-    nav('/')
+    nav('/articles')
   }
 
   const noAuth = [<Link to='/sign-in' className={classes['signIn']} key='signIn'>Sign In</Link>,
@@ -33,7 +33,7 @@ const PageHeader = ({userName, userImg, logOut, getCurrentUser}) => {
   const leftBar =userName? profile:noAuth
     
   return ( <header className={classes['header']}>
-    <Link  to="/" className={classes['blogName']}><h1 className={classes['blogName']}>Realworld Blog</h1></Link>
+    <Link  to="/articles" className={classes['blogName']}><h1 className={classes['blogName']}>Realworld Blog</h1></Link>
     <div className={classes['leftBar']}>
       {leftBar}
     </div>

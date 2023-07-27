@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 
-import FormInput from '../FormInput/FormInput'
+import FormInput from '../../FormInput/FormInput'
 import * as actions from '../../../redux/actions'
 
 import classes from './EditProfile.module.scss'

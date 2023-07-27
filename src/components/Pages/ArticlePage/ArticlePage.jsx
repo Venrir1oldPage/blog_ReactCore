@@ -8,7 +8,7 @@ import PropTypes from 'prop-types'
 
 
 import * as actions from '../../../redux/actions'
-import ArticleHeader from '../ArticleHeader/ArticleHeader'
+import ArticleHeader from '../../Articles/ArticleHeader/ArticleHeader'
 
 import classes from './ArticlePage.module.scss'
 

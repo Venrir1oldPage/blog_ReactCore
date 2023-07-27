@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 
 
 import * as actions from '../../../redux/actions'
-import FormInput from '../FormInput/FormInput'
+import FormInput from '../../FormInput/FormInput'
 
 import classes from './SignUp.module.scss'
 
@@ -34,7 +34,6 @@ const SignUp = ({serverErrors, clearServerErrors, createUser}) => {
     createUser(newUser)
     navigate('/sign-in')
   }
-
 
   useEffect(() => {
     if (serverErrors) {
@@ -101,9 +100,9 @@ const SignUp = ({serverErrors, clearServerErrors, createUser}) => {
           options = {register('agree', { required: 'You should agree' })}  error={errors.agree}
         />
         <button type="submit" className={classes['button']} disabled={Object.keys(errors).length} >Create</button>
-        <p className={classes['question']} >Already have an account? 
-          <Link to='/sign-in' className={classes['link']} > Sign In.</Link></p>
       </form>
+      <p className={classes['question']} >Already have an account? 
+        <Link to='/sign-in' className={classes['link']} > Sign In.</Link></p>
     </div>
   )
 }

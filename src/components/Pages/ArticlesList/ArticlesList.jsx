@@ -6,8 +6,8 @@ import { v4 as uuidv4 } from 'uuid'
 import PropTypes from 'prop-types'
 
 import {getArticles}  from '../../../redux/actions'
-import CustomPafination from '../CustomPagination/CustomPagination'
-import ArticleShort from '../ArticleShort/ArticleShort'
+import CustomPafination from '../../Articles/CustomPagination/CustomPagination'
+import ArticleShort from '../../Articles/ArticleShort/ArticleShort'
 
 import classes from './ArticlesList.module.scss'
 
@@ -18,7 +18,13 @@ const ArticlesList = ({articlesData, articlesCount, loading, error, getArticles}
   const antIcon = <LoadingOutlined spin />
 
   useEffect(() => {
-    getArticles(page)
+    let stop = false
+    if(!stop){
+      getArticles(page)
+    }
+    return () => {
+      stop=true
+    }
   }, [page])
 
   const change = (page) => {
@@ -36,6 +42,7 @@ const ArticlesList = ({articlesData, articlesCount, loading, error, getArticles}
     )
   })
 
+
   return (
     <div className={classes['articlesPage']}>
       <ul className={classes['list']}>
@@ -45,7 +52,6 @@ const ArticlesList = ({articlesData, articlesCount, loading, error, getArticles}
     </div>
   )
 }
-
 
 const mapStateToProps =(state) => ({
   articlesData:state.articles.articles,
