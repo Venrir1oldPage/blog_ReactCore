@@ -42,12 +42,8 @@ const SignIn = ({serverErrors,userName, clearServerErrors, login}) => {
 
   useEffect(() => {
     if (serverErrors) {
-      Object.entries(serverErrors).forEach(([key, value]) => {
-        if (key === 'username' || key === 'email') {
-          const field = key
-          setError(field, { type: 'serverError', message: `${value}` })
-        }
-      })
+      setError('password', { type: 'serverError', message: 'email or password is wrong' })
+      setError('email', { type: 'serverError', message: 'email or password is wrong' })
     }
   }, [serverErrors, errors])
 
@@ -87,15 +83,15 @@ const SignIn = ({serverErrors,userName, clearServerErrors, login}) => {
 
 const mapStateToProps =(state) => ({
   serverErrors:state.user.serverErrors,
-  userName:state.user.userName
+  userName:state.user.userName,
 })
 
 SignIn.propTypes = {
-  serverErrors:PropTypes.array,
+  serverErrors:PropTypes.object,
   userName:PropTypes.string,
   clearServerErrors:PropTypes.func.isRequired,
   login:PropTypes.func.isRequired,
-  
+  isLoggined:PropTypes.bool
 }
 
 export default connect(mapStateToProps, actions)(SignIn)

@@ -37,44 +37,49 @@ const Api = {
     }
   },
 
-  async createUser(newUser) {
-    const response = await fetch(`${this.baseUrl}/users`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-      },
-      body: JSON.stringify({ user: newUser }),
-    })
-    const data = await response.json()
-
-    if (!response.ok) {
-      throw data.errors
+  async createUser(newUser)  {
+    try {
+      const res = await axios({
+        method: 'post',
+        url:`${this.baseUrl}/users`,
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+        },
+        data: JSON.stringify({ user: newUser }),
+      }) 
+      const {data} = res
+      this.token = data.user.token
+      window.localStorage.setItem('tokenForBlog', this.token)
+      return data
+    }catch (e) {
+      if (e.response.status === 422){
+        const {data} = e.response
+        return data
+      }
     }
-
-    this.token = data.user.token
-    window.localStorage.setItem('token', this.token)
-    return data
   },
 
   async login(loginData) {
-    const res = await axios({
-      method: 'post',
-      url:`${this.baseUrl}/users/login`,
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-      },
-      data: JSON.stringify({ user: loginData }),
-    }) 
-    const {data} = res
-    if (res.status !== 200){
-      throw data.errors=[{password:'Something went wrong. Check your data'}]
-    }
-    this.token = data.user.token
-    window.localStorage.setItem('tokenForBlog', this.token)
-    return data
-  },
+    try {
+      const res = await axios({
+        method: 'post',
+        url:`${this.baseUrl}/users/login`,
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+        },
+        data: JSON.stringify({ user: loginData }),
+      }) 
+      const {data} = res
+      this.token = data.user.token
+      window.localStorage.setItem('tokenForBlog', this.token)
+      return data
+    }catch (e) {
+      if (e.response.status === 422){
+        const {data} = e.response
+        return data
+      }
+    }},
 
-  
   logOut() {
     this.token = ''
     window.localStorage.removeItem('tokenForBlog')
@@ -82,7 +87,6 @@ const Api = {
 
   async updateUser(newUserData) {
     const token = window.localStorage.getItem('tokenForBlog')
-
     const res = await axios({
       method: 'put',
       url:`${this.baseUrl}/user`,
@@ -99,7 +103,6 @@ const Api = {
     this.token = data.user.token
     window.localStorage.setItem('tokenForBlog', this.token)
     return data
-    
   },
 
   async getCurrentUser() {
@@ -175,7 +178,6 @@ const Api = {
   },
 
   async toggleLike(slug, like) {
-    console.log(like)
     const method=like?'post':'delete'
     const token = window.localStorage.getItem('tokenForBlog')
     const res = await axios({

@@ -3,7 +3,8 @@ import Api from '../Api/Api'
 export const initArticles = (articles, articlesCount) => ({ type: 'GOT_ARTICLES', articles:articles, articlesCount:articlesCount})
 export const initArticle = (article) => ({ type: 'GOT_ARTICLE', article:article })
 
-export const initErrList = () => ({ type: 'GOT_ERROR_IN_LIST'})
+export const initErrList = () => {
+  return ({ type: 'GOT_ERROR_IN_LIST'})}
 export const initErrInArticle = () => ({ type: 'GOT_ERROR_IN_ARTICLE'})
 
 export const getArticles = (page) => async (dispatch) => {
@@ -30,28 +31,50 @@ export const getArticle = (slug) => async (dispatch) => {
   }}
   
 export const  clearServerErrors = () => ({ type: 'CLEAR_SERVER_ERRORS'})
-export const initServerError = () => ({ type: 'GOT_ERROR_IN_USER'})
+export const initServerError = (errors) => ({ type: 'GOT_ERROR_IN_USER', errors:errors})
 export const initUser = (user) => ({ type: 'INIT_USER', user:user })
+export const createdUser = () =>({ type: 'USER_CREATED'})
 
 export const createUser= (user) => async (dispatch) => {
-  try {
-    await Api.createUser(user)
-  }
-  catch (e) {
-    dispatch(initServerError())
+  dispatch(clearServerErrors())
+  let res = await Api.createUser(user)
+  if (res.errors){
+    dispatch(initServerError(res.errors))
+  }else {
+    dispatch(createdUser())
+    dispatch(clearServerErrors())
   }}
-
 
 export const login = (userData) => async (dispatch) => {
-  try {
-    let data= await Api.login(userData)
-    if (data == 500) {data= await Api.getArticle(user)}
-    const {user}= data
-    dispatch(initUser(user))
-  }
-  catch (e) {
-    dispatch(initServerError())
+  dispatch(clearServerErrors())
+  let res = await  Api.login(userData)
+  dispatch(initUser(res.user))
+  if (res.errors){
+    dispatch(initServerError(res.errors))
+  }else {
+    dispatch(clearServerErrors())
   }}
+
+// try {
+//   let data= await Api.login(userData)
+//   if (data == 500) {data= await Api.getArticle(user)}
+//   const {user}= data
+//   dispatch(initUser(user))
+// }
+// catch (e) {
+//   dispatch(initServerError())
+// }}
+
+// export const login = (userData) => async (dispatch) => {
+//   try {
+//     let data= await Api.login(userData)
+//     if (data == 500) {data= await Api.getArticle(user)}
+//     const {user}= data
+//     dispatch(initUser(user))
+//   }
+//   catch (e) {
+//     dispatch(initServerError())
+//   }}
 
 export const logOut= () => {
   Api.logOut()

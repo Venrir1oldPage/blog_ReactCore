@@ -15,8 +15,15 @@ const userReducer = (state=user, action) =>{
     return newState
   case('LOG_OUT'):
     newState.userName=null
-    newState.userImg=null
+    newState.userImg='https://api.realworld.io/images/smiley-cyrus.jpeg',
     newState.userEmail=null
+    newState.created=false
+    return newState
+  case('GOT_ERROR_IN_USER'):
+    newState.serverErrors = action.errors
+    return newState
+  case('USER_CREATED'):
+    newState.created = true
     return newState
   default: return state
   }}

@@ -40,6 +40,11 @@ const PageHeader = ({userName, userImg, logOut, getCurrentUser}) => {
   </header>)
 }
 
+PageHeader.defaultProps = {
+  userImg:'https://api.realworld.io/images/smiley-cyrus.jpeg'
+}
+
+
 const mapStateToProps =(state) => ({
   userName:state.user.userName,
   userImg:state.user.userImg,

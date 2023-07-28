@@ -1,4 +1,4 @@
-import {Link, useNavigate } from 'react-router-dom'
+import {Link, useNavigate } from 'react-router-dom' 
 import { useForm } from 'react-hook-form'
 import { useEffect } from 'react'
 import {connect} from 'react-redux'
@@ -10,7 +10,7 @@ import FormInput from '../../FormInput/FormInput'
 
 import classes from './SignUp.module.scss'
 
-const SignUp = ({serverErrors, clearServerErrors, createUser}) => {
+const SignUp = ({serverErrors, clearServerErrors, createUser, created}) => {
   const navigate = useNavigate()
   
   useEffect(
@@ -31,9 +31,14 @@ const SignUp = ({serverErrors, clearServerErrors, createUser}) => {
       email: data.email,
       password: data.password,
     }
-    createUser(newUser)
-    navigate('/sign-in')
+    await createUser(newUser)
   }
+
+  useEffect(()=>{
+    if(created){
+      navigate('/sign-in')
+    }
+  },[created])
 
   useEffect(() => {
     if (serverErrors) {
@@ -109,12 +114,14 @@ const SignUp = ({serverErrors, clearServerErrors, createUser}) => {
 
 const mapStateToProps =(state) => ({
   serverErrors:state.user.serverErrors,
+  created:state.user.created
 })
 
 SignUp.propTypes = {
-  serverErrors:PropTypes.array,
+  serverErrors:PropTypes.object,
   clearServerErrors:PropTypes.func.isRequired,
   createUser:PropTypes.func.isRequired,
+  created:PropTypes.bool
 }
 
 export default connect(mapStateToProps, actions)(SignUp)

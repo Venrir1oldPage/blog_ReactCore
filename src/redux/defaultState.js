@@ -15,6 +15,7 @@ const defaultState = {
     userEmail:null,
     userImg:null,
     serverErrors:null,
+    created:false,
   }
 }
     
