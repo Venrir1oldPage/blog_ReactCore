@@ -83,18 +83,6 @@ export const editProfile= (userData) => async (dispatch) => {
     dispatch(clearServerErrors())
   }}
 
-
-// export const editProfile= (userData) => async (dispatch) => {
-//   try {
-//     let data= await Api.updateUser(userData)
-//     if (data == 500) {data= await Api.updateUser(userData)}
-//     const {user}= data
-//     dispatch(initUser(user))
-//   }
-//   catch (e) {
-//     dispatch(initServerError())
-//   }}
-
 export const addArticle= (article) => async (dispatch) => {
   try {
     await Api.addArticle(article)
