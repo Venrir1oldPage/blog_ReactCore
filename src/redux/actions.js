@@ -48,33 +48,12 @@ export const createUser= (user) => async (dispatch) => {
 export const login = (userData) => async (dispatch) => {
   dispatch(clearServerErrors())
   let res = await  Api.login(userData)
-  dispatch(initUser(res.user))
   if (res.errors){
     dispatch(initServerError(res.errors))
   }else {
+    dispatch(initUser(res.user))
     dispatch(clearServerErrors())
   }}
-
-// try {
-//   let data= await Api.login(userData)
-//   if (data == 500) {data= await Api.getArticle(user)}
-//   const {user}= data
-//   dispatch(initUser(user))
-// }
-// catch (e) {
-//   dispatch(initServerError())
-// }}
-
-// export const login = (userData) => async (dispatch) => {
-//   try {
-//     let data= await Api.login(userData)
-//     if (data == 500) {data= await Api.getArticle(user)}
-//     const {user}= data
-//     dispatch(initUser(user))
-//   }
-//   catch (e) {
-//     dispatch(initServerError())
-//   }}
 
 export const logOut= () => {
   Api.logOut()
@@ -92,16 +71,29 @@ export const getCurrentUser = () => async (dispatch) => {
     dispatch(initServerError())
   }}
 
+
 export const editProfile= (userData) => async (dispatch) => {
-  try {
-    let data= await Api.updateUser(userData)
-    if (data == 500) {data= await Api.updateUser(userData)}
-    const {user}= data
-    dispatch(initUser(user))
-  }
-  catch (e) {
-    dispatch(initServerError())
+  dispatch(clearServerErrors())
+  let res= await Api.updateUser(userData)
+  if (res.errors){
+    dispatch(initServerError(res.errors))
+  }else {
+    dispatch(initUser(res.user))
+    dispatch(createdUser())
+    dispatch(clearServerErrors())
   }}
+
+
+// export const editProfile= (userData) => async (dispatch) => {
+//   try {
+//     let data= await Api.updateUser(userData)
+//     if (data == 500) {data= await Api.updateUser(userData)}
+//     const {user}= data
+//     dispatch(initUser(user))
+//   }
+//   catch (e) {
+//     dispatch(initServerError())
+//   }}
 
 export const addArticle= (article) => async (dispatch) => {
   try {

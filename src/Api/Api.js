@@ -87,22 +87,24 @@ const Api = {
 
   async updateUser(newUserData) {
     const token = window.localStorage.getItem('tokenForBlog')
-    const res = await axios({
-      method: 'put',
-      url:`${this.baseUrl}/user`,
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-        Authorization: `Bearer ${token}`,
-      },
-      data: JSON.stringify({ user: newUserData }),
-    }) 
-    const {data} = res
-    if (res.status !== 200){
-      throw data.errors=[{password:'Something went wrong. Check your data'}]
+    try{
+      const res = await axios({
+        method: 'put',
+        url:`${this.baseUrl}/user`,
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+          Authorization: `Bearer ${token}`,
+        },
+        data: JSON.stringify({ user: newUserData }),
+      }) 
+      const {data} = res
+      this.token = data.user.token
+      window.localStorage.setItem('tokenForBlog', this.token)
+      return data
+    } catch (e) {
+      const {data} = e.response
+      return data
     }
-    this.token = data.user.token
-    window.localStorage.setItem('tokenForBlog', this.token)
-    return data
   },
 
   async getCurrentUser() {

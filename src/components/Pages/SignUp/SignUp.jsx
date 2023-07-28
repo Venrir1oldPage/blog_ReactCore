@@ -31,7 +31,7 @@ const SignUp = ({serverErrors, clearServerErrors, createUser, created}) => {
       email: data.email,
       password: data.password,
     }
-    await createUser(newUser)
+    createUser(newUser)
   }
 
   useEffect(()=>{

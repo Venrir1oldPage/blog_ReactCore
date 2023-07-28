@@ -2,14 +2,16 @@ import { useForm } from 'react-hook-form'
 import { useEffect } from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
+import {useNavigate} from 'react-router-dom' 
 
 import FormInput from '../../FormInput/FormInput'
 import * as actions from '../../../redux/actions'
 
 import classes from './EditProfile.module.scss'
 
-const EditProfile = ({userName,userImg, userEmail, serverErrors, clearServerErrors, editProfile}) => {
-
+const EditProfile = ({userName,userImg, userEmail, serverErrors, clearServerErrors, editProfile, created}) => {
+  const navigate = useNavigate()
+  
   useEffect(
     () => () => {
       clearServerErrors()
@@ -21,6 +23,12 @@ const EditProfile = ({userName,userImg, userEmail, serverErrors, clearServerErro
   } = useForm({
     mode: 'onBlur',
   })
+
+  useEffect(()=>{
+    if(created){
+      navigate('/sign-in')
+    }
+  },[created])
 
   const onSubmit = async (data) => {
     const newUser = {
@@ -107,16 +115,18 @@ const mapStateToProps =(state) => ({
   serverErrors:state.user.serverErrors,
   userName:state.user.userName,
   userImg:state.user.userImg,
-  userEmail:state.user.userEmail
+  userEmail:state.user.userEmail,
+  created:state.user.created
 })
 
 EditProfile.propTypes = {
   userName:PropTypes.string, 
   userEmail:PropTypes.string, 
   userImg:PropTypes.string, 
-  serverErrors:PropTypes.array,
+  serverErrors:PropTypes.object,
   clearServerErrors:PropTypes.func.isRequired,
   editProfile: PropTypes.func.isRequired,
+  created:PropTypes.bool
 }
 
 export default connect(mapStateToProps, actions)(EditProfile)
