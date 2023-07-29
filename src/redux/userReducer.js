@@ -25,6 +25,9 @@ const userReducer = (state=user, action) =>{
   case('USER_CREATED'):
     newState.created = true
     return newState
+  case('CEAR_CREATED'):
+    newState.created = true
+    return newState
   default: return state
   }}
 

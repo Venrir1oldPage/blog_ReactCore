@@ -10,7 +10,7 @@ import FormInput from '../../FormInput/FormInput'
 
 import classes from './SignUp.module.scss'
 
-const SignUp = ({serverErrors, clearServerErrors, createUser, created}) => {
+const SignUp = ({serverErrors, clearServerErrors, createUser, created, clearCreated}) => {
   const navigate = useNavigate()
   
   useEffect(
@@ -37,6 +37,7 @@ const SignUp = ({serverErrors, clearServerErrors, createUser, created}) => {
   useEffect(()=>{
     if(created){
       navigate('/sign-in')
+      clearCreated()
     }
   },[created])
 

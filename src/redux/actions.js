@@ -34,6 +34,7 @@ export const  clearServerErrors = () => ({ type: 'CLEAR_SERVER_ERRORS'})
 export const initServerError = (errors) => ({ type: 'GOT_ERROR_IN_USER', errors:errors})
 export const initUser = (user) => ({ type: 'INIT_USER', user:user })
 export const createdUser = () =>({ type: 'USER_CREATED'})
+export const clearCreated = () =>({ type: 'CEAR_CREATED'})
 
 export const createUser= (user) => async (dispatch) => {
   dispatch(clearServerErrors())
